@@ -1,14 +1,8 @@
 use std::io;
-#[derive(PartialEq)]
+#[derive(Debug,PartialEq)]
 enum Token{
     NUMBER(String),
     OPERATOR(char),
-}
-
-impl Token {
-    fn get_value(self){
-
-    }
 }
 
 fn main() {
@@ -22,9 +16,6 @@ fn main() {
 
     let t_vec: Vec<Token> = tokenize(expression);
     let t_vec: Vec<Token> = shunt_yard_alg(t_vec);
-    // for i in t_vec{
-    //     println!("{:?}",i);
-    // }
     let res:f64 = calc(t_vec);
     println!("Your Result is {}",res);
 }
@@ -147,7 +138,7 @@ fn calc(t_vec: Vec<Token>) -> f64{
             {
                 let x = stack.pop().unwrap();
                 let y = stack.pop().unwrap();
-                stack.push(x-y);
+                stack.push(y-x);
             },
             Token::OPERATOR('*') =>
             {
